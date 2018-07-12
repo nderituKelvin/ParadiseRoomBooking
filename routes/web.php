@@ -280,7 +280,14 @@ use Illuminate\Support\Facades\Route;
 
             if($booking->save()){
                 if($payment->save()){
-                    return $func->backWithMessage($payment->receiptno, "You have booked a room and your receipt number is: ". $payment->receiptno, "success");
+                    return redirect()->back()->with([
+                        "title" => $payment->receiptno,
+                        "message" => "You have successfully booked a room",
+                        "status" => "success",
+                        "booking" => $booking,
+                        "payment" => $payment
+                    ]);
+//                    return $func->backWithMessage($payment->receiptno, "You have booked a room and your receipt number is: ". $payment->receiptno, "success");
                 }else{
                     $booking->delete();
                     return $func->backWithMessage("Error perfoming transaction", "", "error");
