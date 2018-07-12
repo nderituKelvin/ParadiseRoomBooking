@@ -31,6 +31,7 @@
             <h2>You have booked this room Details: </h2>
             <h3>Receipt Number: </h3>
             <h4>{{ (Session::get('booking'))->receipt }}</h4>
+            
             <h3>From : {{ (Session::get('booking'))->checkin }}</h3>
             <h3>To: {{ (Session::get('booking'))->checkout }}</h3>
             <h3>Status: {{ (Session::get('booking'))->status }}</h3>
