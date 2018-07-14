@@ -6,13 +6,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('bootstrap/assets/img/favicons/android-chrome-192x192.png') }}">
-    <title>Client | Payments Report</title>
+    <title>Admin | Payments Report</title>
     <link href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-top-fixed.css') }}" rel="stylesheet">
 @endsection
 
 @section('body')
-    @include('client.includes.navbar')
+    @include('admin.includes.navbar')
 
 
 
@@ -26,23 +26,25 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">User</th>
                 <th scope="col">Credit</th>
                 <th scope="col">Debit</th>
                 <th scope="col">Description</th>
                 <th scope="col">Paid For</th>
-                <th scope="col">Date</th>
+                <th scope="col">When</th>
             </tr>
             </thead>
             <tbody>
             @foreach($payments as $payment)
-            <tr class="@if($payment->credit == 0) bg-primary @endif">
-                <th>{{ $payment->receiptno }}</th>
-                <th>{{ $payment->credit }}</th>
-                <th>{{ $payment->debit }}</th>
-                <th>{{ $payment->description }}</th>
-                <th>{{ $payment->paidfor }}</th>
-                <th>{{ \Carbon\Carbon::parse($payment->created_at)->diffForHumans() }}</th>
-            </tr>
+                <tr class="@if($payment->credit == 0) bg-primary @endif">
+                    <th>{{ $payment->receiptno }}</th>
+                    <th>{{ \App\User::where('id', $payment->user)->first()->name }}</th>
+                    <th>{{ $payment->credit }}</th>
+                    <th>{{ $payment->debit }}</th>
+                    <th>{{ $payment->description }}</th>
+                    <th>{{ $payment->paidfor }}</th>
+                    <th>{{ \Carbon\Carbon::parse($payment->created_at)->diffForHumans() }}</th>
+                </tr>
             @endforeach
             </tbody>
         </table>

@@ -9,7 +9,9 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('clientViewPayments') }}">Bal - {{ \App\Http\Controllers\FuncController::getCLientBalance(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()) }}</a>
+                    <h6>
+                        <a class="nav-link" href="{{ route('clientViewPayments') }}">Bal - {{ \App\Http\Controllers\FuncController::getCLientBalance(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()) }}</a>
+                    </h6>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('clientHome') }}">Home</a>

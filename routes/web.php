@@ -402,6 +402,69 @@ use Illuminate\Support\Facades\Route;
     Route::get('admin/bookings', [
         'as' => 'adminViewBookings',
         function(){
+            $bookings = Booking::orderby('id', 'desc')->paginate(10);
+            return view('admin.adminViewBookings', [
+                'bookings' => $bookings
+            ]);
+        }
+    ])->middleware('auth')->middleware('ca');
 
+    Route::get('admin/confirmbooking/{booking}', [
+        'as' => 'adminConfirmBooking',
+        function($bookId){
+            $func = new FuncController();
+            $bookRaw = Booking::where('id', $bookId)->where('status', 'pending');
+            if($bookRaw->count() != 1){
+                return $func->backWithMessage("Sorry", "Booking not found", "error");
+            }
+            $booking = $bookRaw->first();
+            $booking->status = "active";
+            if($booking->save()){
+                return $func->backWithMessage("Confirmed", "Booking has been Confirmed and money has been debited back to user account", "success");
+            }else{
+                return $func->backWithMessage("Failed", "System Failure", "error");
+            }
+        }
+    ])->middleware('auth')->middleware('ca');
+
+    Route::get('admin/cancelbooking/{booking}', [
+        'as' => 'adminCancelBooking',
+        function($bookId){
+            $func = new FuncController();
+            $bookRaw = Booking::where('id', $bookId)->where('status', 'pending');
+            if($bookRaw->count() != 1){
+                return $func->backWithMessage("Sorry", "Booking not found", "error");
+            }
+            $booking = $bookRaw->first();
+            $booking->status = "canceled";
+            if($booking->save()){
+                $payment = Payment::where('receiptno', $booking->receipt)->first();
+                $payDeb = new Payment();
+                do{
+                    $payDeb->receiptno = $func->generateRandomString(10);
+                }while($payDeb->receiptno == "" || Payment::where('receiptno', $payDeb->receiptno)->count() == 1 );
+                $payDeb->user = $booking->user;
+                $payDeb->credit = 0;
+                $payDeb->debit = $payment->credit;
+                $payDeb->description = "Refund for canceled booking of room ".Room::where('id', $booking->room)->first()->name.", ".Room::where('id', $booking->room)->first()->location;
+                $payDeb->paidfor = "Refunding";
+                if($payDeb->save()){
+                    return $func->backWithMessage("Canceled", "Booking has been Canceled and money has been debited back to Clients account", "info");
+                }else{
+                    return $func->backWithMessage("Canceled", "But refund could not not be accomplished", "warning");
+                }
+            }else{
+                return $func->backWithMessage("Failed", "System Failure", "error");
+            }
+        }
+    ])->middleware('auth')->middleware('ca');
+
+    Route::get('admin/viewpayments', [
+        'as' => 'adminViewPayments',
+        function(){
+            $payments = Payment::orderBy('id', 'desc')->paginate(10);
+            return view('admin.adminPayments', [
+                'payments' => $payments
+            ]);
         }
     ])->middleware('auth')->middleware('ca');

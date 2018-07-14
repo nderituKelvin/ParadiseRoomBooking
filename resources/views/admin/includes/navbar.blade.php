@@ -14,7 +14,10 @@
                     <a class="nav-link" href="{{ route('adminAddCredits') }}">Credits</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Bookings</a>
+                    <a class="nav-link" href="{{ route('adminViewBookings') }}">Bookings</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('adminViewPayments') }}">Payments</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('adminViewRooms') }}">Rooms</a>
