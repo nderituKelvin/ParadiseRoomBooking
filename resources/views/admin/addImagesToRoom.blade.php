@@ -27,14 +27,14 @@
                 <h4 class="mb-3">Please fill all relevant Details</h4>
                 <form class="needs-validation" action="{{ route('adminPostAddRoomPhotos') }}" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-12 mb-3 align-content-center">
                             <label for="name">Select Image </label>
                             <input type="file" name="file" class="form-control" id="name" placeholder="Enter Name to Display to Client" value="" required>
                         </div>
                     </div>
                     {{ csrf_field() }}
                     <input type="hidden" name="roomid" value="{{ $roomid }}">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Add Room</button>
+                    <button class="btn btn-primary btn-lg" type="submit">Add Photo</button>
                 </form>
             </div>
         </div>

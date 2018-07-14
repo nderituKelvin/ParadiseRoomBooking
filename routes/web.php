@@ -249,14 +249,23 @@ use Illuminate\Support\Facades\Route;
                 return $func->backWithMessage("Failed", "The time is too short", "error");
             }
 
+            if($room->capacity < $request['capacity']){
+                return $func->backWithMessage("Failed", "The room you requested cannot hold that capacity", "error");
+            }
+
             $booking = new Booking();
             $booking->user = Auth::user()->getAuthIdentifier();
             $booking->checkin = $checkin;
             $booking->checkout = $checkout;
-            $booking->capacity = "";
+            $booking->capacity = $request['capacity'];
             $booking->room = $request['roomid'];
             $booking->status = "pending";
             $receiptno = "";
+
+            if(Booking::where('room', $room->id)->where('status', 'pending')->orWhere('status', 'complete')->count() > 0){
+                return $func->backWithMessage("Sorry", "You have already booked this room", "error");
+            }
+
             do{
                 $receiptno = $func->generateRandomString(10);
             }while($receiptno == "" || Payment::where('receiptno', $receiptno)->count() == 1 );
@@ -331,9 +340,68 @@ use Illuminate\Support\Facades\Route;
                     $money->save();
                     return $func->backWithMessage("Topped Up", "", "success");
                 }else{
-                    return $func->backWithMessage("Top Up failed", "", "error");
+                    return $func->backWithMessage("Tcreated_atop Up failed", "", "error");
                 }
 
             }
         }
     ])->middleware('auth')->middleware('cc');
+
+    Route::get('client/payments', [
+        'as' => 'clientViewPayments',
+        function(){
+            $payments = Payment::where('user', Auth::user()->getAuthIdentifier())->orderby('id', 'desc')->paginate(10);
+            return view('client.clientPayment', [
+                "payments" => $payments
+            ]);
+        }
+    ])->middleware('auth')->middleware('cc');
+
+    Route::get('client/bookings', [
+        'as' => 'clientViewBookings',
+        function(){
+            $bookings = Booking::where('user', Auth::user()->getAuthIdentifier())->orderby('id', 'desc')->paginate(10);
+            return view('client.clientBookings', [
+                "bookings" => $bookings
+            ]);
+        }
+    ])->middleware('auth')->middleware('cc');
+
+    Route::get('client/cancelbooking/{booking}', [
+        'as' => 'clientCancelBooking',
+        function($bookId){
+            $func = new FuncController();
+            $bookRaw = Booking::where('id', $bookId)->where('status', 'pending')->where('user', Auth::user()->getAuthIdentifier());
+            if($bookRaw->count() != 1){
+                return $func->backWithMessage("Sorry", "Booking not found", "error");
+            }
+            $booking = $bookRaw->first();
+            $booking->status = "canceled";
+            if($booking->save()){
+                $payment = Payment::where('receiptno', $booking->receipt)->first();
+                $payDeb = new Payment();
+                do{
+                    $payDeb->receiptno = $func->generateRandomString(10);
+                }while($payDeb->receiptno == "" || Payment::where('receiptno', $payDeb->receiptno)->count() == 1 );
+                $payDeb->user = Auth::user()->getAuthIdentifier();
+                $payDeb->credit = 0;
+                $payDeb->debit = $payment->credit;
+                $payDeb->description = "Refund for canceled booking of room ".Room::where('id', $booking->room)->first()->name.", ".Room::where('id', $booking->room)->first()->location;
+                $payDeb->paidfor = "Refunding";
+                if($payDeb->save()){
+                    return $func->backWithMessage("Canceled", "Your Booking has been Canceled and money has been debited back to your account", "info");
+                }else{
+                    return $func->backWithMessage("Canceled", "But refund could not not be accomplished", "warning");
+                }
+            }else{
+                return $func->backWithMessage("Failed", "System Failure", "error");
+            }
+        }
+    ])->middleware('auth')->middleware('cc');
+
+    Route::get('admin/bookings', [
+        'as' => 'adminViewBookings',
+        function(){
+
+        }
+    ])->middleware('auth')->middleware('ca');

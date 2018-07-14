@@ -64,7 +64,7 @@
                     </div>
                     <hr class="mb-4">
                     {{ csrf_field() }}
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Add Room</button>
+                    <button class="btn btn-primary btn-lg" type="submit">Add Room</button>
                 </form>
             </div>
         </div>

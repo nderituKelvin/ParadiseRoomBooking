@@ -107,10 +107,11 @@ class FuncController extends Controller{
         ]);
     }
 
-    public function getClientBalance($userId){
+    public static function getClientBalance($userId){
         $credit = Payment::where('user', $userId)->sum('credit');
         $debit = Payment::where('user', $userId)->sum('debit');
         return $debit-$credit;
     }
+
 
 }

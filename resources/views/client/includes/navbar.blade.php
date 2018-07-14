@@ -7,21 +7,23 @@
         <ul class="navbar-nav mr-auto"></ul>
         <div class="form-inline mt-2 mt-md-0">
             <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('clientViewPayments') }}">Bal - {{ \App\Http\Controllers\FuncController::getCLientBalance(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()) }}</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('clientHome') }}">Home</a>
                 </li>
-
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('clientViewBookings') }}">Bookings</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('clientTopUpBalance') }}">Top up</a>
                 </li>
-
-
-
-
-
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 </li>
+
             </ul>
         </div>
     </div>

@@ -35,7 +35,7 @@
                             </h3>
                             <div class="mb-1 text-muted">Capacity - {{ $room->capacity }}</div>
                             <div class="mb-1 text-muted">Theme - {{ $room->theme }}</div>
-                            <p class="card-text mb-auto">{{ $room->info }}</p>
+                            <p class="card-text mb-auto">{{ substr($room->info, 0, 200) }}</p>
                             <a href="{{ route('clientViewRoom', ['roomid' => $room->id]) }}">View and Book Room</a>
                         </div>
                         <img class="card-img-right flex-auto d-none d-lg-block" src="{{ asset('storage/images/'.\App\Photo::where('native', 'room')->where('nativeid', $room->id)->inRandomOrder()->first()->name) }}" alt="No Images">

@@ -31,7 +31,6 @@
             <h2>You have booked this room Details: </h2>
             <h3>Receipt Number: </h3>
             <h4>{{ (Session::get('booking'))->receipt }}</h4>
-            
             <h3>From : {{ (Session::get('booking'))->checkin }}</h3>
             <h3>To: {{ (Session::get('booking'))->checkout }}</h3>
             <h3>Status: {{ (Session::get('booking'))->status }}</h3>
@@ -59,6 +58,11 @@
                             <input type="date" name="checkoutdate" class="form-control" value="" required>
                             <input type="time" name="checkouttime" class="form-control" value="" required>
                         </div>
+                        <br>
+                        <div class="col-md-12">
+                            <h5>Capacity</h5>
+                            <input type="number" name="capacity" class="form-control" value="" required>
+                        </div>
                     </div>
                     <p>
                         <input type="hidden" value="{{ $room->id }}" name="roomid">
@@ -84,7 +88,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                        <div class="card flex-md-row mb-4 box-shadow">
                             <div class="card-body d-flex flex-column align-items-start">
                                 <strong class="d-inline-block mb-2 text-primary">Ksh {{ $room->ppn }}</strong>
                                 <h3 class="mb-0">
