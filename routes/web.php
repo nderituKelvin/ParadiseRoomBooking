@@ -37,6 +37,14 @@ use Illuminate\Support\Facades\Route;
         }
     ])->middleware('auth');
 
+    Route::get('login', [
+        'as' => 'login',
+        function(){
+            $func = new FuncController();
+            return $func->toRouteWithMessage('homeLogin', 'Logged Out', '', 'info');
+        }
+    ]);
+
     Route::post('postSignUp', [
         'as' => 'postSignUp',
         function(Request $request){
