@@ -14,10 +14,6 @@
 
 @section('body')
     @include('client.includes.navbar')
-
-
-
-
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
@@ -31,7 +27,7 @@
                         <div class="card-body d-flex flex-column align-items-start">
                             <strong class="d-inline-block mb-2 text-primary">Ksh {{ $room->ppn }} per Hour</strong>
                             <h3 class="mb-0">
-                                <a class="text-dark" href="#">{{ $room->name }}</a>
+                                <a class="text-dark" href="{{ route('clientViewRoom', ['roomid' => $room->id]) }}">{{ $room->name }}</a>
                             </h3>
                             <div class="mb-1 text-muted">Capacity - {{ $room->capacity }}</div>
                             <div class="mb-1 text-muted">Theme - {{ $room->theme }}</div>
@@ -46,14 +42,10 @@
         {{ $rooms->links() }}
     </div>
 
-
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; {{ date("Y") }}</p>
     </footer>
     </div>
-
-
-
 
 @endsection
 

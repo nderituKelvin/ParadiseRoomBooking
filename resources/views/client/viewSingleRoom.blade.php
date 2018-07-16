@@ -46,6 +46,7 @@
         <section class="jumbotron text-center">
             <div class="container">
                 <h2 class="jumbotron-heading"><u>Book Room</u></h2>
+                @if(\Illuminate\Support\Facades\Auth::check() == true)
                 <form action="{{ route('clientPostBookRoom') }}" method="post" >
                     <div class="row">
                         <div class="col-md-6">
@@ -70,6 +71,10 @@
                         <input type="submit" class="btn btn-primary btn-block my-2" value="Book">
                     </p>
                 </form>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-info btn-md">Login to book a room</a>
+                @endif
+
             </div>
         </section>
 

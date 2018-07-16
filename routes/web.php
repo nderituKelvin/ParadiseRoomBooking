@@ -12,11 +12,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-    Route::get('/',[
+    Route::get('/login', [
         'as' => 'homeLogin',
-        function () {
+        function(){
             return view('rootLogin');
-        }]);
+        }
+    ]);
 
     Route::get('/signup', [
         'as' => 'homeSignUp',
@@ -37,7 +38,7 @@ use Illuminate\Support\Facades\Route;
         }
     ])->middleware('auth');
 
-    Route::get('login', [
+    Route::get('loginn', [
         'as' => 'login',
         function(){
             $func = new FuncController();
@@ -211,15 +212,15 @@ use Illuminate\Support\Facades\Route;
         }
     ])->middleware('auth')->middleware('ca');
 
-    Route::get('client/home', [
+    Route::get('/', [
         'as' => "clientHome",
         function(){
             $rooms = Room::where('status', 'active')->orderby('id', 'desc')->paginate(5);
-                return view("client.clientHome", [
-                    'rooms' => $rooms
-                ]);
-            }
-    ])->middleware('auth')->middleware('cc');
+            return view("client.clientHome", [
+                'rooms' => $rooms
+            ]);
+        }
+    ]);
 
     Route::get('client/rooms/{roomid}', [
         'as' => 'clientViewRoom',
@@ -235,7 +236,7 @@ use Illuminate\Support\Facades\Route;
                 ]);
             };
         }
-    ])->middleware('auth')->middleware('cc');
+    ]);
 
     Route::post('client/postBookRoom', [
         'as' => 'clientPostBookRoom',
