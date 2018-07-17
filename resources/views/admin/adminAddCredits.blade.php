@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('bootstrap/assets/img/favicons/android-chrome-192x192.png') }}">
-    <title>Admin | Add Credits</title>
+    <title>Admin | Confirm MPESA codes</title>
     <link href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-top-fixed.css') }}" rel="stylesheet">
 @endsection
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
-            <h2>Add Credits</h2>
+            <h2>Confirm MPESA Codes</h2>
         </div>
         <div class="row">
             <div class="col-md-12 order-md-1">
@@ -28,7 +28,7 @@
                 <form class="needs-validation" action="{{ route('adminPostAddCredits') }}" method="post">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="code">Credit Codes</label>
+                            <label for="code">Mpesa Codes</label>
                             <input type="text" name="code" class="form-control" id="code" placeholder="Clients will use this to top up account" value="" required>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -38,7 +38,7 @@
                     </div>
                     <hr class="mb-4">
                     {{ csrf_field() }}
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Add Code</button>
+                    <button class="btn btn-primary btn-lg " type="submit">Confirm MPESA Code</button>
                 </form>
             </div>
         </div>

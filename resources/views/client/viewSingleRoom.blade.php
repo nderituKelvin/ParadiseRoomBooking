@@ -33,6 +33,9 @@
             <h4>{{ (Session::get('booking'))->receipt }}</h4>
             <h3>From : {{ (Session::get('booking'))->checkin }}</h3>
             <h3>To: {{ (Session::get('booking'))->checkout }}</h3>
+            <h3 style="color: #0023ff"> Total Days {{ \Carbon\Carbon::parse(Session::get('booking')->checkin)->diffInDays(Session::get('booking')->checkout) }}  </h3>
+            <h3 style="color: #00cc00"> Amount Per day = {{ \App\Room::where('id', Session::get('booking')->room)->first()->ppn }}</h3>
+            <h3 style="color: #ff0d00"> Total Amount = {{ \Carbon\Carbon::parse(Session::get('booking')->checkin)->diffInDays(Session::get('booking')->checkout) * \App\Room::where('id', Session::get('booking')->room)->first()->ppn }} </h3>
             <h3>Status: {{ (Session::get('booking'))->status }}</h3>
 
         </div>

@@ -27,7 +27,7 @@
         @foreach($rooms as $room)
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card flex-md-row mb-4 box-shadow">
                     <div class="card-body d-flex flex-column align-items-start">
                         <strong class="d-inline-block mb-2 text-primary">Ksh {{ $room->ppn }}</strong>
                         <h3 class="mb-0">

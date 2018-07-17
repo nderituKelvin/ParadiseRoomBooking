@@ -20,11 +20,11 @@
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
-            <h2>Top Up Balance</h2>
+            <h2>Pay into Account</h2>
         </div>
         <div class="row">
             <div class="col-md-12 order-md-1">
-                <h4 class="mb-3">Enter Credit Card Below</h4>
+                <h4 class="mb-3">Enter MPESA Confirmation code below</h4>
                 <form class="needs-validation" action="{{ route('clientPostTopUp') }}" method="post">
                     <div class="row">
                         <div class="col-md-12 mb-3">

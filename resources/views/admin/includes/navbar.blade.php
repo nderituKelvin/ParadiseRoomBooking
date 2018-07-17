@@ -11,7 +11,7 @@
                     <a class="nav-link" href="{{ route('adminHome') }}">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('adminAddCredits') }}">Credits</a>
+                    <a class="nav-link" href="{{ route('adminAddCredits') }}">MPESA</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('adminViewBookings') }}">Bookings</a>

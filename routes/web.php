@@ -194,7 +194,7 @@ use Illuminate\Support\Facades\Route;
             $money->value = $request['amount'];
             $money->status = "active";
             if($money->save()){
-                return $func->backWithMessage("Added", "Saved, you can now sell this card", "success");
+                return $func->backWithMessage("Added", "Saved", "success");
             }else{
                 return $func->backWithUnknownError();
             }
@@ -329,7 +329,7 @@ use Illuminate\Support\Facades\Route;
             $func = new FuncController();
             $moneyRaw = Money::where('code', $request['code'])->where('status', 'active');
             if($moneyRaw->count() != 1){
-                return $func->backWithMessage("Wrong Credit Code", "", "error");
+                return $func->backWithMessage("Wrong MPESA Code", "", "error");
             }else{
                 $money = $moneyRaw->first();
                 $payment = new Payment();
@@ -341,7 +341,7 @@ use Illuminate\Support\Facades\Route;
                 $payment->receiptno = $receiptno;
                 $payment->credit = 0;
                 $payment->debit = $money->value;
-                $payment->description = "Topped Up code: ".$request['code'];
+                $payment->description = "Topped Up MPESA code: ".$request['code'];
                 $payment->paidfor = "Loaded credit";
 
                 $money->status = "used";
@@ -349,7 +349,7 @@ use Illuminate\Support\Facades\Route;
                     $money->save();
                     return $func->backWithMessage("Topped Up", "", "success");
                 }else{
-                    return $func->backWithMessage("Tcreated_atop Up failed", "", "error");
+                    return $func->backWithMessage("Failed", "", "error");
                 }
 
             }
