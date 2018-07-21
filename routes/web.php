@@ -477,3 +477,53 @@ use Illuminate\Support\Facades\Route;
             ]);
         }
     ])->middleware('auth')->middleware('ca');
+
+    Route::get('admin/deleteroom/{roomid}', [
+        'as' => 'adminDeleteRoom',
+        function($roomid){
+            $func = new FuncController();
+            $bookings = Booking::where('room', $roomid)->get();
+            foreach($bookings as $booking){
+                $booking->delete();
+            }
+            $room = Room::where('id', $roomid)->first();
+            $room->delete();
+
+            return $func->backWithMessage("Delete", "Room and all its data tree have been deleted", "info");
+        }
+    ])->middleware('auth')->middleware('ca');
+
+    Route::get('admin/updateroom/{roomid}', [
+        'as' => 'adminViewUpdateRoom',
+        function($roomid){
+            $func = new FuncController();
+            $roomRaw = Room::where('id', $roomid);
+            if($roomRaw->count() != 1){
+                return $func->backWithMessage("Room Not found", "", "error");
+            }
+            $room = $roomRaw->first();
+            return view('admin.adminUpdateRoom', [
+                'room' => $room
+            ]);
+        }
+    ])->middleware('auth')->middleware('ca');
+
+    Route::post('admin/postupdateroom', [
+        'as' => 'postUpdateRoom',
+        function(Request $request){
+            $func = new FuncController();
+            $room = Room::where('id', $request['roomid'])->first();
+            $room->name = $request['name'];
+            $room->location = $request['location'];
+            $room->ppn = $request['charges'];
+            $room->capacity = $request['capacity'];
+            $room->theme = $request['theme'];
+            $room->size = $request['size'];
+            $room->info = $request['info'];
+            if($room->update()){
+                return $func->backWithMessage("Updated", "", "success");
+            }else{
+                return $func->backWithMessage("Sorry, and error occurred", "", "error");
+            }
+        }
+    ])->middleware('auth')->middleware('ca');

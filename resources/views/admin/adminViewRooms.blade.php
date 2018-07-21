@@ -33,6 +33,11 @@
                         <h3 class="mb-0">
                             <a class="text-dark" href="#">{{ $room->name }}</a>
                         </h3>
+                        <span>
+                            <a href="{{ route('adminViewUpdateRoom', ['roomid' => $room->id]) }}" class="btn btn-primary btn-sm">Update</a>
+                            <a href="{{ route('adminDeleteRoom', ['roomid' => $room->id]) }}" class="btn btn-danger btn-sm">Delete</a>
+                        </span>
+
                         <div class="mb-1 text-muted">Capacity - {{ $room->capacity }}</div>
                         <div class="mb-1 text-muted">Theme - {{ $room->theme }}</div>
                         <p class="card-text mb-auto">{{ $room->info }}</p>
@@ -59,15 +64,6 @@
 
 @section('scripts')
     <script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
     <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>
-    <script src="{{ asset('css/holder.min.js') }}"></script>
-    <script>
-        Holder.addTheme('thumb', {
-            bg: '#55595c',
-            fg: '#eceeef',
-            text: 'Thumbnail'
-        });
-    </script>
 @endsection
