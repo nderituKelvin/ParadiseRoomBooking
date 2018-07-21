@@ -38,18 +38,19 @@
             </thead>
             <tbody>
             @foreach($bookings as $booking)
-                <tr class=" @if($booking->status == "pending")
-                        bg-warning
-@endif
-                @if($booking->status == "active")
-                        bg-success
-@endif
-                @if($booking->status == "done")
-                        bg-info
-@endif
-                @if($booking->status == "canceled")
-                        bg-danger
-@endif ">
+                    <tr class="
+                    @if($booking->status == "pending")
+                            bg-warning
+                    @endif
+                    @if($booking->status == "active")
+                            bg-success
+                    @endif
+                    @if($booking->status == "done")
+                            bg-info
+                    @endif
+                    @if($booking->status == "canceled")
+                            bg-danger
+                    @endif ">
                     <th>{{ $booking->receipt }}</th>
                     <th>{{ \App\Payment::where('receiptno', $booking->receipt)->first()->credit }}</th>
                     <th>{{ $booking->capacity }}</th>

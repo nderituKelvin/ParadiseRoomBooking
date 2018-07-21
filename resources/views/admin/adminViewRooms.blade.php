@@ -41,7 +41,7 @@
                         <div class="mb-1 text-muted">Capacity - {{ $room->capacity }}</div>
                         <div class="mb-1 text-muted">Theme - {{ $room->theme }}</div>
                         <p class="card-text mb-auto">{{ $room->info }}</p>
-                        <a href="#">View Images and History</a>
+                        <a href="{{ route('adminViewRoomAndHistory', ['roomid' => $room->id]) }}">View Images and History</a>
                     </div>
                     <img class="card-img-right flex-auto d-none d-lg-block" src="{{ asset('storage/images/'.\App\Photo::where('native', 'room')->where('nativeid', $room->id)->inRandomOrder()->first()->name) }}" alt="No Images">
                 </div>

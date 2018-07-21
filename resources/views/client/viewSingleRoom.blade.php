@@ -127,15 +127,6 @@
 
 @section('scripts')
     <script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>
-    {{--<script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>--}}
     <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>
-    <script src="{{ asset('css/holder.min.js') }}"></script>
-    <script>
-        Holder.addTheme('thumb', {
-            bg: '#55595c',
-            fg: '#eceeef',
-            text: 'Thumbnail'
-        });
-    </script>
 @endsection

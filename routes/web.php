@@ -10,6 +10,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
     Route::get('/login', [
@@ -525,5 +526,51 @@ use Illuminate\Support\Facades\Route;
             }else{
                 return $func->backWithMessage("Sorry, and error occurred", "", "error");
             }
+        }
+    ])->middleware('auth')->middleware('ca');
+
+    Route::get('client/updatepassword', [
+        'as' => 'clientUpdatePassword',
+        function(){
+            return view('client.clientUpdatePassword');
+        }
+    ])->middleware('auth')->middleware('cc');
+
+    Route::post('client/postUpdatePassword', [
+        'as' => 'clientPostUpdatePassword',
+        function(Request $request){
+            $func = new FuncController();
+            $user = Auth::user();
+
+            if($request['newpass'] != $request['conpass']){
+                return $func->backWithMessage("Sorry", "Your Password don't match", "error");
+            }else{
+                if(!Hash::check($request['password'], $user->getAuthPassword())){
+                    return $func->backWithMessage("Your Password is incorrect", "", "error");
+                }else{
+                    $user->password = bcrypt($request['password']);
+                    if($user->update()){
+                        return $func->backWithMessage("Updated", "Password has been updated", "success");
+                    }else{
+                        return $func->backWithMessage("Sorry", "We could not update your password", "error");
+                    }
+                }
+            }
+        }
+    ])->middleware('auth')->middleware('cc');
+
+    Route::get('admin/roomandhistory/{roomid}', [
+        'as' => 'adminViewRoomAndHistory',
+        function($roomid){
+            $func = new FuncController();
+            $roomRaw = Room::where('id', $roomid);
+            if($roomRaw->count() == 0){
+                return $func->backWithMessage("Sorry", "Room not found", "error");
+            }
+            $room = $roomRaw->first();
+            return view('admin.adminViewRoomData', [
+                'room' => $room,
+                'bookings' => Booking::where('room', $room->id)->paginate(10)
+            ]);
         }
     ])->middleware('auth')->middleware('ca');

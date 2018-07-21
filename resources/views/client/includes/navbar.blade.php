@@ -24,6 +24,10 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('clientTopUpBalance') }}">Top up</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('clientUpdatePassword') }}">Change Password</a>
+                </li>
+
                     @endif
                 @if(\Illuminate\Support\Facades\Auth::check() == false)
                     <li class="nav-item active">
