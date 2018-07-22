@@ -275,6 +275,9 @@ use Illuminate\Support\Facades\Route;
             if(Booking::where('room', $room->id)->where('status', 'pending')->orWhere('status', 'complete')->count() > 0){
                 return $func->backWithMessage("Sorry", "You have already booked this room", "error");
             }
+            if(Booking::where('room', $room->id)->where('checkin', '>=', Carbon::parse($booking->checkin))->where('checkout', '<=', Carbon::parse($booking->checkout))->count() > 0){
+                return $func->backWithMessage("Sorry", "THis room is not available at that time", "error");
+            }
 
             do{
                 $receiptno = $func->generateRandomString(10);
@@ -574,3 +577,33 @@ use Illuminate\Support\Facades\Route;
             ]);
         }
     ])->middleware('auth')->middleware('ca');
+
+    Route::get('admin/viewclients', [
+        'as' => 'adminViewClients',
+        function(){
+            $clients = User::where('usertype', 'client')->paginate(10);
+            return view('admin.adminViewClients', [
+                'clients' => $clients
+            ]);
+        }
+    ])->middleware('auth')->middleware('ca');
+
+    Route::get('admin/resetclientpassword/{client}', [
+        'as' => 'resetClientPassword',
+        function($client){
+            $func = new FuncController();
+            $userRaw = User::where('usertype', 'client')->where('id', $client);
+            if($userRaw->count() != 1){
+                return $func->backWithMessage("Client not found", "", "error");
+            }else{
+                $user = $userRaw->first();
+                $user->password = bcrypt($user->phone);
+                if($user->update()){
+                    return $func->backWithMessage("Updated", "Password has been reset to users phone number", "success");
+                }else{
+                    return $func->backWithMessage("An error occurred while resetting password", "", "error");
+                }
+            }
+        }
+    ])->middleware('auth')->middleware('ca');
+

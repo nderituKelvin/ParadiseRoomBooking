@@ -20,14 +20,14 @@
                     <a class="nav-link" href="{{ route('adminViewPayments') }}">Payments</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('adminViewClients') }}">Clients</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ route('adminViewRooms') }}">Rooms</a>
                 </li>
-
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 </li>
-
-
             </ul>
         </div>
     </div>

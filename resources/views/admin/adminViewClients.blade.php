@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('bootstrap/assets/img/favicons/android-chrome-192x192.png') }}">
-    <title>Admin | Payments Report</title>
+    <title>Admin | View Clients</title>
     <link href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-top-fixed.css') }}" rel="stylesheet">
 @endsection
@@ -16,35 +16,34 @@
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
-            <h2>Payments</h2>
+            <h2>Clients</h2>
         </div>
         <table class="table table-hover table-striped table-bordered table-responsive-lg">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">User</th>
-                <th scope="col">Credit</th>
-                <th scope="col">Debit</th>
-                <th scope="col">Description</th>
-                <th scope="col">Paid For</th>
-                <th scope="col">When</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Status</th>
+                <th scope="col">Signed Up</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            @foreach($payments as $payment)
-                <tr class="@if($payment->credit == 0) bg-primary @endif">
-                    <th>{{ $payment->receiptno }}</th>
-                    <th>{{ \App\User::where('id', $payment->user)->first()->name }}</th>
-                    <th>{{ $payment->credit }}</th>
-                    <th>{{ $payment->debit }}</th>
-                    <th>{{ $payment->description }}</th>
-                    <th>{{ $payment->paidfor }}</th>
-                    <th>{{ \Carbon\Carbon::parse($payment->created_at)->diffForHumans() }}</th>
+            @foreach($clients as $client)
+                <tr>
+                    <th>{{ $client->name }}</th>
+                    <th>{{ $client->phone }}</th>
+                    <th>{{ $client->status }}</th>
+                    <th>{{ \Carbon\Carbon::parse($client->created_at)->diffForHumans() }}</th>
+                    <th>
+                        <a href="{{ route('resetClientPassword', ['client' => $client->id]) }}" class="btn btn-primary">Reset Password</a>
+                    </th>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        {{ $payments->links() }}
+        {{ $clients->links() }}
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; {{ date("Y") }}</p>
         </footer>
