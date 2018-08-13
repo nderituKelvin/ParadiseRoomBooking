@@ -15,7 +15,7 @@
 @section('body')
     <form class="form-signin" method="post" action="{{ route('postSignIn') }}">
         <img class="mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-192x192.png') }}" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Paradise Hotel</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Confy Halls</h1>
         <h1 class="h4 mb-4 font-weight-normal">Login</h1>
         <label for="inputEmail" class="sr-only">Phone</label>
         <input type="tel" id="inputUsername" name="phone" class="form-control" placeholder="Phone" required autofocus>

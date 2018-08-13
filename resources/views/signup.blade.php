@@ -15,7 +15,7 @@
 @section('body')
     <form class="form-signin" method="post" enctype="multipart/form-data" action="{{ route('postSignUp') }}">
         <img class="mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-192x192.png') }}" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Paradise Hotel</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Confy Halls</h1>
         <h1 class="h4 mb-4 font-weight-normal">Sign Up</h1>
 
         <label for="inputName" class="sr-only">Name</label>

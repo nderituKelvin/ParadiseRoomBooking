@@ -18,6 +18,17 @@
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
             <h2>Payments</h2>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                Show data of last:
+                <a href="{{ route('adminViewPayments', ['range' => 'day']) }}" class="btn btn-sm btn-primary"> Day</a>
+                <a href="{{ route('adminViewPayments', ['range' => 'week']) }}" class="btn btn-sm btn-primary"> Week</a>
+                <a href="{{ route('adminViewPayments', ['range' => 'month']) }}" class="btn btn-sm btn-primary"> Month</a>
+                <a href="{{ route('adminViewPayments', ['range' => 'year']) }}" class="btn btn-sm btn-primary"> Year</a>
+            </div>
+            <br>
+            <br>
+        </div>
         <table class="table table-hover table-striped table-bordered table-responsive-lg">
             <thead class="thead-dark">
             <tr>

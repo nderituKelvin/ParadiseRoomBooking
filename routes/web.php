@@ -251,6 +251,9 @@ use Illuminate\Support\Facades\Route;
             }
             $checkin = Carbon::parse($request['checkindate'] ." ".$request['checkintime']);
             $checkout = Carbon::parse($request['checkoutdate'] ." ".$request['checkouttime']);
+            if($checkin <= Carbon::now()){
+                return $func->backWithMessage("Failed", "You requested a date in the past", "error");
+            }
             if($checkin >= $checkout){
                 return $func->backWithMessage("Failed", "The Check out Date must be greater that Check in date", "error");
             }
@@ -412,10 +415,28 @@ use Illuminate\Support\Facades\Route;
         }
     ])->middleware('auth')->middleware('cc');
 
-    Route::get('admin/bookings', [
+    Route::get('admin/bookings/{range?}', [
         'as' => 'adminViewBookings',
-        function(){
-            $bookings = Booking::orderby('id', 'desc')->paginate(10);
+        function($range = 'all'){
+            if($range == "all"){
+                $bookings = Booking::orderby('id', 'desc')->paginate(10);
+            }else if($range == 'day'){
+                $bookings = Booking::orderby('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subDay())
+                    ->paginate(10);
+            }else if($range == 'week'){
+                $bookings = Booking::orderby('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subWeek())
+                    ->paginate(10);
+            }else if($range == 'month'){
+                $bookings = Booking::orderby('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subMonth())
+                    ->paginate(10);
+            }else if($range == 'year'){
+                $bookings = Booking::orderby('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subYear())
+                    ->paginate(10);
+            }
             return view('admin.adminViewBookings', [
                 'bookings' => $bookings
             ]);
@@ -472,10 +493,28 @@ use Illuminate\Support\Facades\Route;
         }
     ])->middleware('auth')->middleware('ca');
 
-    Route::get('admin/viewpayments', [
+    Route::get('admin/viewpayments/{range?}', [
         'as' => 'adminViewPayments',
-        function(){
-            $payments = Payment::orderBy('id', 'desc')->paginate(10);
+        function($range = 'all'){
+            if($range == 'all'){
+                $payments = Payment::orderBy('id', 'desc')->paginate(10);
+            }elseif ($range == 'day'){
+                $payments = Payment::orderBy('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subDay())
+                    ->paginate(10);
+            }elseif ($range == 'week'){
+                $payments = Payment::orderBy('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subWeek())
+                    ->paginate(10);
+            }elseif ($range == 'month'){
+                $payments = Payment::orderBy('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subMonth())
+                    ->paginate(10);
+            }elseif ($range == 'year'){
+                $payments = Payment::orderBy('id', 'desc')
+                    ->where('created_at', '>', Carbon::now()->subYear())
+                    ->paginate(10);
+            }
             return view('admin.adminPayments', [
                 'payments' => $payments
             ]);
