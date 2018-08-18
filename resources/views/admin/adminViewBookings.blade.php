@@ -40,7 +40,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Charges</th>
                 <th scope="col">Capacity</th>
-                <th scope="col">Room</th>
+                <th scope="col">Hall</th>
                 <th scope="col">Checkin</th>
                 <th scope="col">Check Out</th>
                 <th scope="col">Status</th>
@@ -104,7 +104,7 @@
 @endsection
 
 @section('scripts')
-    <script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>
+    {{--<script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>--}}
+    {{--<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>--}}
 @endsection

@@ -23,7 +23,7 @@
                     <a class="nav-link" href="{{ route('adminViewClients') }}">Clients</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('adminViewRooms') }}">Rooms</a>
+                    <a class="nav-link" href="{{ route('adminViewRooms') }}">Halls</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>

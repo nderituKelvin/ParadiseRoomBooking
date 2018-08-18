@@ -17,7 +17,7 @@
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
-            <h2>View Rooms</h2>
+            <h2>View Halls</h2>
         </div>
 
         @foreach($rooms as $room)
@@ -50,16 +50,16 @@
 @endsection
 
 @section('scripts')
-    <script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>
-    <script src="{{ asset('css/holder.min.js') }}"></script>
-    <script>
-        Holder.addTheme('thumb', {
-            bg: '#55595c',
-            fg: '#eceeef',
-            text: 'Thumbnail'
-        });
-    </script>
+    {{--<script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>--}}
+    {{--<script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('css/holder.min.js') }}"></script>--}}
+    {{--<script>--}}
+        {{--Holder.addTheme('thumb', {--}}
+            {{--bg: '#55595c',--}}
+            {{--fg: '#eceeef',--}}
+            {{--text: 'Thumbnail'--}}
+        {{--});--}}
+    {{--</script>--}}
 @endsection

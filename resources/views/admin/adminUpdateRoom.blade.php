@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('bootstrap/assets/img/favicons/android-chrome-192x192.png') }}">
-    <title>Admin | Update Room</title>
+    <title>Admin | Update Hall</title>
     <link href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-top-fixed.css') }}" rel="stylesheet">
 @endsection
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
-            <h2>Update Room - {{ $room->name }}</h2>
+            <h2>Update Hall - {{ $room->name }}</h2>
         </div>
         <div class="row">
             <div class="col-md-12 order-md-1">
@@ -81,7 +81,7 @@
 @endsection
 
 @section('scripts')
-    <script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>
+    {{--<script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>--}}
+    {{--<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>--}}
 @endsection

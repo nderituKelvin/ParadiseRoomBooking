@@ -20,7 +20,7 @@
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{{ asset('bootstrap/assets/img/favicons/android-chrome-512x512.png') }}" alt="" width="72" height="72">
-            <h2>Add A Room</h2>
+            <h2>Add A Hall</h2>
         </div>
         <div class="row">
             <div class="col-md-12 order-md-1">
@@ -50,6 +50,6 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>
+    {{--<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>--}}
 @endsection

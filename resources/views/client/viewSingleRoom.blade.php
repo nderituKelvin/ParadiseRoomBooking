@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('bootstrap/assets/img/favicons/android-chrome-192x192.png') }}">
-    <title>Client | View Room</title>
+    <title>Client | View Hall</title>
     <link href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-top-fixed.css') }}" rel="stylesheet">
     <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
@@ -48,7 +48,7 @@
 
         <section class="jumbotron text-center">
             <div class="container">
-                <h2 class="jumbotron-heading"><u>Book Room</u></h2>
+                <h2 class="jumbotron-heading"><u>Book Hall</u></h2>
                 @if(\Illuminate\Support\Facades\Auth::check() == true)
                 <form action="{{ route('clientPostBookRoom') }}" method="post" >
                     <div class="row">
@@ -75,7 +75,7 @@
                     </p>
                 </form>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-info btn-md">Login to book a room</a>
+                    <a href="{{ route('login') }}" class="btn btn-info btn-md">Login to book a hall</a>
                 @endif
 
             </div>
@@ -126,7 +126,7 @@
 @endsection
 
 @section('scripts')
-    <script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>
+    {{--<script>window.jQuery || document.write('<script src="{{ asset('bootstrap/assets/js/vendor/jquery-slim.min.js') }}"><\/script>')</script>--}}
+    {{--<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('bootstrap/assets/js/vendor/popper.min.js') }}"></script>--}}
 @endsection
